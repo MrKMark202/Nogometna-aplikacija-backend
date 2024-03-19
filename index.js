@@ -1,42 +1,49 @@
-import { methods } from './functions.js';
+// Importi
 import express  from "express";
 import cors from "cors";
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import User from '../models/Users.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const app = express()
+app.get('/', (req, res) => {
+  res.send('Hello World');
+});
+
+//app.use(cookieParser());
 
 
-dotenv.config({path: __dirname + "/.env"});
+app.use(cors({
+    credentials: true,
+    origin: 'https://wa-nogometna-aplikacija.netlify.app'
+  }));
+
+const port = process.env.PORT || 3000;
+
+//app.use(bodyParser.json())
+app.use(express.urlencoded({ extended: false }));
+
+const dbUri = 'mongodb+srv://makatalinic:teetee02@nogometnaaplikacija.uczg4pk.mongodb.net/'
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(dbUri,{ useNewUrlParser: true, useUnifiedTopology: true, dbName: 'nogometnaAplikacija'})
   .then(() => console.log("Connected"))
   .catch((error) => console.log(error));
 
 console.log('Loaded .env file with MONGO_URI:', process.env.MONGO_URI);
 
-const app = express();
-app.use(cors());
-app.use(express.json())
-const port = process.env.PORT || 3000;
+// Consts i drugi importi
+
+import authRoute from "./routes/auth.js";
 
 
 //Rute za auth
+app.use("/api/auth",authRoute);
 
-app.post("/signUp", (req, res) => {
+app.post("/auth/logIn", (req, res) => {
     //...
 })
 
-app.post("/logIn", (req, res) => {
-    //...
-})
-
-app.post("/logOut", (req, res) => {
+app.post("/auth/logOut", (req, res) => {
     //...
 })
 

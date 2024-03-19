@@ -21,16 +21,15 @@ const userSchema = new mongoose.Schema({
         type:String,
         required: true,
         unique: true,
-        match: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/
     },
 
     password: {
         type: String,
-        minlength: 8,
         required: true,
+        unique: true,
     },
 });
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("Users", userSchema);
 
-module.exports = User;
+export default User;
