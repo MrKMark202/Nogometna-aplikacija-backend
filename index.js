@@ -11,7 +11,6 @@ app.get('/', (req, res) => {
 
 //app.use(cookieParser());
 
-
 app.use(cors({
     credentials: true,
     origin: 'https://wa-nogometna-aplikacija.netlify.app'

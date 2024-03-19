@@ -1,5 +1,7 @@
 import User from "../models/Users.js";
-import { passwordHash, authenticateToken, verify } from '../utils/middleware.js';
+import passwordHash from '../utils/middleware.js';
+import authenticateToken from '../utils/middleware.js';
+import verify  from '../utils/middleware.js';
 import { Cookie } from "express-session";
 import jwt from 'jsonwebtoken';
 
