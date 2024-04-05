@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-//app.use(cookieParser());
+app.use(cookieParser());
 
 app.use(cors({
     credentials: true,
@@ -18,7 +18,7 @@ app.use(cors({
 
 const port = process.env.PORT || 10000;
 
-//app.use(bodyParser.json())
+app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }));
 
 const dbUri = 'mongodb+srv://makatalinic:teetee02@nogometnaaplikacija.uczg4pk.mongodb.net/'
