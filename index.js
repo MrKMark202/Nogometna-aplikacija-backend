@@ -13,10 +13,11 @@ app.get('/', (req, res) => {
 
 app.use(cors({
     credentials: true,
-    origin: 'https://wa-nogometna-aplikacija.netlify.app'
+    //origin: 'https://wa-nogometna-aplikacija.netlify.app'
+    origin: 'http://localhost:8080/'
   }));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 10000;
 
 //app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }));

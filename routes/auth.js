@@ -16,13 +16,14 @@ dotenv.config();
 
 
 router.post("/signUp", async (req, res) => {
-    const { name, lname, email, password } = req.body
+    const { ime, prezime, email, password, datumRodenja} = req.body
+    const profilna = req.files ? req.files.profilna : null; // Dobavi sliku iz zahtjeva
     const userDb = await User.findOne({ email })
     if (userDb) {
       res.status(400).send({ msg: "User already exist" })
     } else {
       const hashedPassword = passwordHash(password)
-      const newUser = await User.create({ name, lname, email, password: hashedPassword })
+      const newUser = await User.create({ ime, prezime, email, password: hashedPassword, datumRodenja, profilna })
       res.status(200).send({ msg: 'OK' })
       console.log('Korisnik kreiran')
     }
