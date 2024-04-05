@@ -18,7 +18,7 @@ dotenv.config();
 router.post("/signUp", async (req, res) => {
     const { ime, prezime, email, password, datumRodenja} = req.body
     const profilna = req.files ? req.files.profilna : null; // Dobavi sliku iz zahtjeva
-    const userDb = await User.findOne({ email })
+    const userDb = await User.findOne({ email }).maxTimeMS(20000); // Povećajte timeout na 20 sekundi (20000 milisekundi)
     if (userDb) {
       res.status(400).send({ msg: "User already exist" })
     } else {
