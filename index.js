@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'
 import cookieParser from "cookie-parser";
+import bodyParser from "body-parser"
 
 const app = express()
 app.get('/', (req, res) => {
