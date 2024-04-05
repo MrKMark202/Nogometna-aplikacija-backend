@@ -6,7 +6,7 @@ import { Cookie } from "express-session";
 import jwt from 'jsonwebtoken';
 
 //ROUTER IMPORT
-import { Router } from "express";
+import { Router, request, response } from "express";
 const router = Router();
 
 //DOTENV IMPORT
