@@ -13,8 +13,7 @@ app.get('/', (req, res) => {
 
 app.use(cors({
     credentials: true,
-    //origin: 'https://wa-nogometna-aplikacija.netlify.app'
-    origin: 'http://localhost:8080/'
+    origin: 'https://wa-nogometna-aplikacija.netlify.app'
   }));
 
 const port = process.env.PORT || 10000;
