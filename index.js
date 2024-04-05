@@ -21,10 +21,8 @@ const port = process.env.PORT || 10000;
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }));
 
-const dbUri = 'mongodb+srv://makatalinic:teetee02@nogometnaaplikacija.uczg4pk.mongodb.net/'
-
 mongoose
-  .connect(dbUri,{ useNewUrlParser: true, useUnifiedTopology: true, dbName: 'nogometnaAplikacija'})
+  .connect(process.env.MONGO_URI,{ useNewUrlParser: true, useUnifiedTopology: true, dbName: 'nogometnaAplikacija'})
   .then(() => console.log("Connected"))
   .catch((error) => console.log(error));
 
