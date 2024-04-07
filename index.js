@@ -15,7 +15,8 @@ app.use(cookieParser());
 
 app.use(cors({
     credentials: true,
-    origin: 'https://wa-nogometna-aplikacija.netlify.app'
+    //origin: 'https://wa-nogometna-aplikacija.netlify.app'
+    origin: 'http://localhost:8080/'
   }));
 
 const port = process.env.PORT || 10000;
