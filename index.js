@@ -36,7 +36,7 @@ import authRoute from "./routes/auth.js";
 
 
 //Rute za auth
-app.use("/api/auth",authRoute);
+app.use("/auth",authRoute);
 
 app.post("/auth/logIn", (req, res) => {
     //...
