@@ -16,18 +16,22 @@ dotenv.config();
 
 
 router.post("/signUp", async (req, res) => {
-    const { ime, prezime, email, password, datumRodenja} = req.body
+  try{
+    let { ime, prezime, email, password, datumRodenja } = req.body
     const profilna = req.files ? req.files.profilna : null; // Dobavi sliku iz zahtjeva
     if (!email) {
       return res.status(400).json({error: 'Email is required'});
     } else {
-      const hashedPassword = passwordHash(password)
-      const newUser = await User.create({ ime, prezime, email, password: hashedPassword, datumRodenja, profilna })
-      res.status(200).send({ msg: 'OK' })
-      console.log('Korisnik kreiran')
+        const hashedPassword = passwordHash(password)
+        const newUser = await User.create({ ime, prezime, email, password: hashedPassword, datumRodenja, profilna })
+        res.status(200).send({ msg: 'OK' })
+        console.log('Korisnik kreiran')
+      }
+  } catch(error) {
+      console.log(error);
+        return res.status(500).json({result: false, error: 'Internal server error'});
     }
-  
-  })
+})
 
   router.post("/login", async (req, res) => {
     const userDb = req.body;
