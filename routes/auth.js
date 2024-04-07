@@ -17,8 +17,7 @@ dotenv.config();
 
 router.post("/signUp", async (req, res) => {
   try{
-    let { ime, prezime, email, password, datumRodenja } = req.body
-    const profilna = req.files ? req.files.profilna : null; // Dobavi sliku iz zahtjeva
+    let { ime, prezime, email, password, datumRodenja, profilna } = req.body
     if (!email) {
       return res.status(400).json({error: 'Email is required'});
     } else {
