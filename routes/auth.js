@@ -1,14 +1,12 @@
 import User from "../models/Users.js";
-import passwordHash from '../utils/middleware.js';
-import authenticateToken from '../utils/middleware.js';
-import verify  from '../utils/middleware.js';
+import auth from "../utils/authenticateToken.js"
 import { Cookie } from "express-session";
-import jwt from 'jsonwebtoken';
+import passwordHash from '../utils/passwordHash.js'
 
 //ROUTER IMPORT
-import { Router, request, response } from "express";
+import { Router } from "express";
 const router = Router();
-
+ 
 //DOTENV IMPORT
 import dotenv from 'dotenv';
 dotenv.config();
@@ -17,11 +15,11 @@ dotenv.config();
 
 router.post("/signUp", async (req, res) => {
   try{
-    let { ime, prezime, email, password, datumRodenja, profilna} = req.body
-    //const profilna = req.files ? req.files.profilna : null; // Dobavi sliku iz zahtjeva
-    if (!email) {
-      return res.status(400).json({error: 'Email is required'});
-    } else {
+    let { ime, prezime, email, password, datumRodenja, profilna } = req.body
+        const userDb = await User.findOne({ email })
+        if (userDb) {
+          res.status(400).send({ msg: "User already exist" })
+        } else {
         const hashedPassword = passwordHash(password)
         const newUser = await User({ ime: ime, prezime: prezime, email: email, password: hashedPassword, datumRodenja: datumRodenja, profilnaSlika: profilna });
         await newUser.save();
@@ -35,35 +33,16 @@ router.post("/signUp", async (req, res) => {
 })
 
   router.post("/login", async (req, res) => {
-    const userDb = req.body;
+    let {email, password} = req.body;
+    console.log(email, password);
+    
     try {
-      let result = await authenticateToken(userDb.email, userDb.password);
-      
-      
-      res.cookie('token', result.token, {
-        maxAge: 7 * 24 * 60 * 60 * 1000, 
-        httpOnly: false, 
-        secure: true, 
-        sameSite: 'none'
-      });
-      
-      res.send(result);
-      
-    } catch (e) {
-      res.status(403).json({ error: e.message });
+      let result = await auth.authenticateToken(email, password)
+      res.json(result);
+    } catch(error) {
+      res.status(401).json({error: error.message})
     }
+    
   });
-  
-  
-  router.post('/logout', (req, res) => {
-    const cookieOptions = {
-      httpOnly: false, 
-      secure: true, 
-      sameSite: 'none'
-    };
-    res.clearCookie('token', cookieOptions);
-    res.status(200).json({ message: 'Logout successful' });
-  });
-  
   
 export default router;

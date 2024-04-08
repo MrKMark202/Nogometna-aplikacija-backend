@@ -13,11 +13,7 @@ app.get('/', (req, res) => {
 
 app.use(cookieParser());
 
-app.use(cors({
-    credentials: true,
-    //origin: 'https://wa-nogometna-aplikacija.netlify.app'
-    origin: 'http://localhost:8080/'
-  }));
+app.use(cors());
 
 const port = process.env.PORT || 10000;
 
@@ -31,21 +27,15 @@ mongoose
 
 console.log('Loaded .env file with MONGO_URI:', process.env.MONGO_URI);
 
+
 // Consts i drugi importi
-
 import authRoute from "./routes/auth.js";
-
 
 //Rute za auth
 app.use("/api/auth",authRoute);
 
-app.post("/auth/logIn", (req, res) => {
-    //...
-})
 
-app.post("/auth/logOut", (req, res) => {
-    //...
-})
+
 
 //Rute za ligu
 app.post("/nekiuser/Lige", (req, res) => {
