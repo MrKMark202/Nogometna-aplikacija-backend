@@ -13,9 +13,9 @@ async function authenticateToken(email, password) {
     if (userDb && userDb.password && comparePassword(password, userDb.password)) {
         delete userDb.password
 
-        let token = jwt.sign(userDb, process.env.JWT_SECRET, {
+        let token = jwt.sign({email: userDb.email, profilna: userDb.profilnaSlika}, process.env.JWT_SECRET, {
             algorithm: 'HS512',
-            expiresIn: "1 hour"
+            expiresIn: "1hour"
         })
 
         return {
@@ -23,11 +23,10 @@ async function authenticateToken(email, password) {
             email: userDb.email,
             profilna: userDb.profilnaSlika
         }
-
+    
     } else {
-        throw new Error("Cannot authenticate")
+        throw new Error("Cannot authenticate");
     }
-
 }
 
 

@@ -16,6 +16,7 @@ dotenv.config();
 router.post("/signUp", async (req, res) => {
   try{
     let { ime, prezime, email, password, datumRodenja, profilna } = req.body
+    console.log(profilna)
         const userDb = await User.findOne({ email })
         if (userDb) {
           res.status(400).send({ msg: "User already exist" })
@@ -34,7 +35,6 @@ router.post("/signUp", async (req, res) => {
 
   router.post("/login", async (req, res) => {
     let {email, password} = req.body;
-    console.log(email, password);
     
     try {
       let result = await auth.authenticateToken(email, password)
