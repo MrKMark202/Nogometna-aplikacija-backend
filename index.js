@@ -30,17 +30,20 @@ console.log('Loaded .env file with MONGO_URI:', process.env.MONGO_URI);
 
 // Consts i drugi importi
 import authRoute from "./routes/auth.js";
+import ligaRoute from "./routes/liga.js";
+import klubRoute from "./routes/klub.js";
+import utakmicaRoute from "./routes/utakmica.js";
 
 //Rute za auth
 app.use("/api/auth",authRoute);
+app.use("/api/liga",ligaRoute);
+app.use("/api/klub",klubRoute);
+app.use("/api/utakmica",utakmicaRoute);
 
 
 
 
-//Rute za ligu
-app.post("/nekiuser/Lige", (req, res) => {
-    //...
-})
+
 
 
 //Rute za klubove

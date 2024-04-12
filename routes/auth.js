@@ -33,16 +33,16 @@ router.post("/signUp", async (req, res) => {
     }
 })
 
-  router.post("/login", async (req, res) => {
-    let {email, password} = req.body;
+router.post("/login", async (req, res) => {
+  let {email, password} = req.body;
     
-    try {
-      let result = await auth.authenticateToken(email, password)
-      res.json(result);
-    } catch(error) {
-      res.status(401).json({error: error.message})
-    }
+  try {
+    let result = await auth.authenticateToken(email, password)
+    res.json(result);
+  } catch(error) {
+    res.status(401).json({error: error.message})
+  }
     
-  });
+});
   
 export default router;
