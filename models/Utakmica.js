@@ -3,9 +3,8 @@ import mongoose from "mongoose";
 const utakmicaSchema = new mongoose.Schema({
 
     kolo: {
-        type:Number,
+        type:String,
         required: true,
-        unique: true
     },
 
     stadionNaziv: {
@@ -18,8 +17,13 @@ const utakmicaSchema = new mongoose.Schema({
         required: true,
     },
 
+    gledateljiBroj: {
+        type:Number,
+        required: true
+    },
+
     datum: {
-        type: Date,
+        type: String,
         required: true,
     },
 

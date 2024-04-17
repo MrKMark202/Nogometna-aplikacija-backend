@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     },
 
     datumRodenja: {
-        type:Date,
+        type:String,
         required: true
     },
 

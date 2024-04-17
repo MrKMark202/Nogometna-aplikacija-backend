@@ -33,103 +33,17 @@ import authRoute from "./routes/auth.js";
 import ligaRoute from "./routes/liga.js";
 import klubRoute from "./routes/klub.js";
 import utakmicaRoute from "./routes/utakmica.js";
+import tablicaRoute from "./routes/tablica.js";
+import userRoute from "./routes/user.js";
 
 //Rute za auth
 app.use("/api/auth",authRoute);
 app.use("/api/liga",ligaRoute);
 app.use("/api/klub",klubRoute);
 app.use("/api/utakmica",utakmicaRoute);
+app.use("/api/tablica", tablicaRoute);
+app.use("/api/user", userRoute);
 
-
-
-
-
-
-
-//Rute za klubove
-app.post("/nekiuser/Lige/Klubovi", (req, res) => {
-    //...
-})
-
-app.post("/nekiuser/Lige/Klubovi/Tablica/Podaci", (req, res) => {
-    //...
-})
-
-//Rute za utakmice
-app.post("/nekiuser/Lige/Utakmice", (req, res) => {
-    //...
-})
-
-app.post("/nekiuser/Lige/Klubovi/Tablica/Podaci", (req, res) => {
-    //...
-})
-
-//Rute za tablicu
-
-app.get("/nekiuser/Lige/:imelige", (req, res) => {
-    //...
-})
-
-//Za Domaćina
-app.get("/nekiuser/Lige/Klubovi/:imekluba", (req, res) => {
-    //...
-})
-//Za Gosta
-app.get("/nekiuser/Lige/Klubovi/:imekluba", (req, res) => {
-    //...
-})
-
-app.get("/nekiuser/Lige/Klubovi/Tablica/Podaci", (req, res) => {
-    //...
-})
-
-app.delete("/nekiuser/Lige/:imelige", (req, res) => {
-    //...
-})
-
-app.delete("/nekiuser/Lige/Klubovi/:imekluba", (req, res) => {
-    //...
-})
-
-//Rute za pregled utakmica
-
-app.delete("/nekiuser/Lige/Utakmice", (req, res) => {
-    //...
-})
-
-app.get("/nekiuser/Lige/Utakmice", (req, res) => {
-    //...
-})
-
-
-/*
-app.get("/auth", (req, res) => {
-    res.json({"token": "asdf"});
-})
-
-app.post("/user", (req, res) => {
-    res.status(201).send();
-})
-
-app.get("/studenti/hh", (req, res) => {
-    console.log(studenti)
-    res.json({"status": "ok"});
-})
-
-app.get("/studenti/:jmbag", (req, res) => {
-    res.json({"jmbag": "322456"});
-})
-
-app.post("/studenti", (req, res) => {
-    const student = {
-        ime: "Marko",
-        prezime: "Katalinic",
-        JMBAG: '0303770100'
-    }
-    methods.addStudent(student);
-    res.status(201).send();
-})
-*/
 
 app.listen(port, () => {
 	console.log(`Servis radi na portu ${port}`);

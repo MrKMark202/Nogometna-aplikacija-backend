@@ -40,14 +40,31 @@ router.get('/dohvat', async (req, res) => {
     const userLiga = req.query.liga;
     const user = await User.findOne({ email: userEmail });
     const liga = await Liga.findOne({naziv: userLiga})
-    const lige = await Klub.find({ liga: liga._id, korisnik: user._id});
-    const naziviKlubova = lige.map(klub => klub.naziv);
+    const klub = await Klub.find({ liga: liga._id, korisnik: user._id});
+    const naziviKlubova = klub.map(klub => klub.naziv);
     res.status(200).json(naziviKlubova);
   } catch (error) {
       console.error('Greška prilikom dohvaćanja liga:', error);
       res.status(500).json({ error: 'Došlo je do greške prilikom dohvaćanja liga' });
   }
 });
-  
+
+router.patch('/delete', async (req, res) => {
+  try {
+    let { ligaName, clubName, userEmail} = req.body;
+
+    const user = await User.findOne({email: userEmail});
+    const liga = await Liga.findOne({naziv: ligaName});
+
+    await Klub.deleteMany({korisnik: user._id, naziv: clubName, liga: liga._id});
+
+    console.log('Klub je izbrisan!');
+    return res.status(200).json({result: true});
+
+  } catch (error) {
+      console.error('Greška prilikom brisanja kluba:', error);
+      res.status(500).json({ error: 'Došlo je do greške prilikom brisanja kluba' });
+  }
+});
   
 export default router;
