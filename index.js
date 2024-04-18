@@ -12,9 +12,7 @@ app.get('/', (req, res) => {
 
 app.use(cookieParser());
 
-app.use(cors({
-  origin: 'https://wa-nogometna-aplikacija.netlify.app'
-}));
+app.use(cors());
 
 const port = process.env.PORT || 10000;
 
