@@ -23,8 +23,8 @@ router.get('/dohvat', async (req, res) => {
   
       res.status(200).json(userDb);
     } catch (error) {
-        console.error('Greška prilikom dohvaćanja podataka tablice:', error);
-        res.status(500).json({ error: 'Došlo je do greške prilikom dohvaćanja podataka tablice' });
+        console.error('Greška prilikom dohvaćanja podataka korisnika:', error);
+        res.status(500).json({ error: 'Došlo je do greške prilikom dohvaćanja podataka korisnika' });
     }
 });
 
@@ -80,8 +80,8 @@ router.patch('/update/lozinka', async (req, res) =>{
 
 
     } catch(error) {
-        console.error('Greška prilikom ažuriranja podataka korisnika:', error);
-        res.status(500).json({ error: 'Došlo je do greške prilikom ažuriranja podataka korisnika' });
+        console.error('Greška prilikom ažuriranja lozinke korisnika:', error);
+        res.status(500).json({ error: 'Došlo je do greške prilikom ažuriranja lozinke korisnika' });
     }
 });
 

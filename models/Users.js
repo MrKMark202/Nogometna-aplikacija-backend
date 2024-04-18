@@ -31,6 +31,11 @@ const userSchema = new mongoose.Schema({
     profilnaSlika: {
         type: String,
         required: true,
+    },
+
+    pin: {
+        type: Number,
+        required: true,
     }
 });
 

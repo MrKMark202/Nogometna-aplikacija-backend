@@ -80,7 +80,7 @@ router.get('/dohvat/jedna', async (req, res) => {
       res.status(200).json(utakmicaDb);
     } catch (error) {
         console.error('Greška prilikom dohvaćanja podataka utakmice:', error);
-        res.status(500).json({ error: 'Došlo je do greške prilikom dohvaćanja podataka utakmica'});
+        res.status(500).json({ error: 'Došlo je do greške prilikom dohvaćanja podataka utakmice'});
     }
 });
 

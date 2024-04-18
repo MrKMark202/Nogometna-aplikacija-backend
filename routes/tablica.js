@@ -12,7 +12,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 router.post("/create", async (req, res) => {
-    try{
+    try {
 
         let { bodovi, postignutiPogodci, primljeniPogodci, odigranihDvoboja, grbKlub, liga, klub, userEmail } = req.body
 
@@ -34,11 +34,9 @@ router.post("/create", async (req, res) => {
 });
 
 router.patch("/update/domacin", async (req, res) => {
-    try{
+    try {
 
         let { bodovi, postignutiPogodci, primljeniPogodci, odigranihDvoboja, liga, klub, korisnik} = req.body
-
-        console.log(bodovi, postignutiPogodci, primljeniPogodci, odigranihDvoboja, liga, klub, korisnik)
 
         const user = await User.findOne({ email: korisnik });
 
@@ -57,7 +55,7 @@ router.patch("/update/domacin", async (req, res) => {
 });
 
 router.patch("/update/gost", async (req, res) => {
-    try{
+    try {
 
         let { bodovi, postignutiPogodci, primljeniPogodci, odigranihDvoboja, liga, klub, korisnik} = req.body
 
@@ -79,27 +77,25 @@ router.patch("/update/gost", async (req, res) => {
 
 router.get('/dohvat/domacin', async (req, res) => {
   try {
+        const userEmail = req.query.email;
+        const userLiga = req.query.liga;
+        const userKlub = req.query.domacin;
 
-    const userEmail = req.query.email;
-    const userLiga = req.query.liga;
-    const userKlub = req.query.domacin;
+        const userDb = await User.findOne({ email: userEmail });
+        const ligeDb = await Liga.findOne({ naziv: userLiga});
+        const klubDb = await Klub.findOne({ naziv: userKlub});
 
-    const userDb = await User.findOne({ email: userEmail });
-    const ligeDb = await Liga.findOne({ naziv: userLiga});
-    const klubDb = await Klub.findOne({ naziv: userKlub});
+        const tablicaDb = await Tablica.find({korisnik: userDb._id, liga: ligeDb._id, klub: klubDb.naziv})
 
-    const tablicaDb = await Tablica.find({korisnik: userDb._id, liga: ligeDb._id, klub: klubDb.naziv})
-
-    res.status(200).json(tablicaDb);
-  } catch (error) {
+        res.status(200).json(tablicaDb);
+    } catch (error) {
       console.error('Greška prilikom dohvaćanja podataka tablice domaćeg kluba:', error);
       res.status(500).json({ error: 'Došlo je do greške prilikom dohvaćanja podataka tablice domaćeg kluba' });
-  }
+    }
 });
 
 router.get('/dohvat/gost', async (req, res) => {
     try {
-  
       const userEmail = req.query.email;
       const userLiga = req.query.liga;
       const userKlub = req.query.gost;
@@ -111,14 +107,13 @@ router.get('/dohvat/gost', async (req, res) => {
   
       res.status(200).json(tablicaDb);
     } catch (error) {
-        console.error('Greška prilikom dohvaćanja podataka tablice gostujući klub:', error);
-        res.status(500).json({ error: 'Došlo je do greške prilikom dohvaćanja podataka tablice za gostujući klub' });
+        console.error('Greška prilikom dohvaćanja podataka tablice gostujućeg kluba:', error);
+        res.status(500).json({ error: 'Došlo je do greške prilikom dohvaćanja podataka tablice za gostujućieg kluba' });
     }
 });
 
 router.get('/dohvat', async (req, res) => {
     try {
-  
       const userEmail = req.query.email;
       const userLiga = req.query.liga;
   

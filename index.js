@@ -1,8 +1,7 @@
-// Importi
+// Glavni importi
 import express  from "express";
 import cors from "cors";
 import mongoose from 'mongoose';
-import dotenv from 'dotenv'
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser"
 
@@ -13,7 +12,9 @@ app.get('/', (req, res) => {
 
 app.use(cookieParser());
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://wa-nogometna-aplikacija.netlify.app'
+}));
 
 const port = process.env.PORT || 10000;
 
@@ -24,11 +25,10 @@ mongoose
   .connect(process.env.MONGO_URI,{ useNewUrlParser: true, useUnifiedTopology: true, dbName: 'nogometnaAplikacija'})
   .then(() => console.log("Connected"))
   .catch((error) => console.log(error));
-
 console.log('Loaded .env file with MONGO_URI:', process.env.MONGO_URI);
 
 
-// Consts i drugi importi
+// Importi ruta
 import authRoute from "./routes/auth.js";
 import ligaRoute from "./routes/liga.js";
 import klubRoute from "./routes/klub.js";
